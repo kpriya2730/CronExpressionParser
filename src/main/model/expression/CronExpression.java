@@ -16,8 +16,20 @@ public class CronExpression {
         this.expression = expression;
     }
 
+    public List<CronField> getCronFields() {
+        return cronFields;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public String getExpression() {
+        return expression;
+    }
+
     public void print(){
-        cronFields.stream().forEach(cronField -> cronField.print());
+        cronFields.forEach(CronField::print);
         printCommand();
     }
 

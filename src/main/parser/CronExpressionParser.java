@@ -1,26 +1,26 @@
 package main.parser;
 
 import main.model.expression.CronExpression;
-import main.model.field.CronField;
-import main.model.field.FieldName;
-import main.model.field.SpecialCharacter;
+import main.model.field.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class CronExpressionParser {
-    private final List<CronFieldParser> cronFieldParser;
+    private final List<CronField> cronFields;
 
-    public CronExpressionParser(List<CronFieldParser> cronFieldParser){
-        this.cronFieldParser = cronFieldParser;
+    public CronExpressionParser(){
+        this.cronFields = new ArrayList<>(List.of(new MinuteField(), new HourField(), new DayOfMonthField(), new MonthField(), new DayOfWeekField()));
     }
     public CronExpression parse(String expression){
         final String[] fields = expression.split(" ");
         validateFields(fields);
-        List<CronField> cronFields = new ArrayList<>(5);
         for(int i=0;i<5;i++){
-            cronFields.add(i, cronFieldParser.get(i).parse(fields[i]));
+            CronField cronField = cronFields.get(i);
+            cronField.setExpression(fields[i]);
+            cronField.parse();
+
         }
         StringBuilder sb = new StringBuilder();
         for(int i=5;i<fields.length;i++){
