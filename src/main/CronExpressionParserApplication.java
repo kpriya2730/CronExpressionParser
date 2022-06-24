@@ -8,14 +8,14 @@ import java.util.*;
 public class CronExpressionParserApplication {
 
     public static void main(String[] args){
-//        Scanner sc = new Scanner(System.in);
-//        String expression  = sc.nextLine();
+        Scanner sc = new Scanner(System.in);
+        String expression  = sc.nextLine();
 
         CronExpressionParserApplication application = new CronExpressionParserApplication();
         CronExpressionParser cronExpressionParser= new CronExpressionParser();
-//        CronExpression cronExpression = cronExpressionParser.parse(expression);
-//        cronExpression.print();
-        application.test();
+        CronExpression cronExpression = cronExpressionParser.parse(expression);
+        cronExpression.print();
+//        application.test();
 
     }
 

@@ -1,5 +1,7 @@
 package main.parser;
 
+import main.converter.AnnotationConverter;
+import main.converter.Converter;
 import main.model.expression.CronExpression;
 import main.model.field.*;
 
@@ -9,11 +11,19 @@ import java.util.List;
 
 public class CronExpressionParser {
     private final List<CronField> cronFields;
+    private final Converter annotationConverter;
 
     public CronExpressionParser(){
         this.cronFields = new ArrayList<>(List.of(new MinuteField(), new HourField(), new DayOfMonthField(), new MonthField(), new DayOfWeekField()));
+        annotationConverter = new AnnotationConverter();
     }
-    public CronExpression parse(String expression){
+    public CronExpression parse(String cronExpression){
+        String expression = cronExpression;
+
+        if(expression.startsWith("@")){
+            expression = annotationConverter.convert(cronExpression);
+        }
+
         final String[] fields = expression.split(" ");
         validateFields(fields);
         for(int i=0;i<5;i++){
