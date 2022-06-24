@@ -2,8 +2,14 @@ package test.parser;
 
 import main.model.expression.CronExpression;
 import main.parser.CronExpressionParser;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.testng.collections.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class CronExpressionParserTest {
 
@@ -12,8 +18,6 @@ public class CronExpressionParserTest {
     @Test
     public void validTest(){
         CronExpression cronExpression = cronExpressionParser.parse("0 3 12 */1 2 /usr/bin/find");
-
-        asse
     }
 
 }
